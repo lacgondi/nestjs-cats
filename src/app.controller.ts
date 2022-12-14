@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Redirect,
   Render,
 } from '@nestjs/common';
@@ -17,20 +18,18 @@ export class AppController {
 
   @Get()
   @Render('index')
-  async listCats() {
-    const [rows] = await db.execute('SELECT * FROM macskak');
-    return { cat: rows };
-  }
+  async listCats(@Query('search') search) {
+    if (search != null) {
+      const [sResults] = await db.execute(
+        'SELECT suly, szem_szin FROM macskak WHERE szem_szin = ?',
+        [search],
+      );
 
-  @Get()
-  @Render('index')
-  async searchCats(@Param('search') search) {
-    const [sResults] = await db.execute(
-      'SELECT suly, szem_szin FROM macskak WHERE szem_szin = ?',
-      [search],
-    );
-
-    return { cat: sResults };
+      return { cat: sResults };
+    } else {
+      const [rows] = await db.execute('SELECT * FROM macskak');
+      return { cat: rows };
+    }
   }
 
   @Get('cats/new')
@@ -38,6 +37,7 @@ export class AppController {
   addCatForm() {
     return {};
   }
+
   @Post('cats/new')
   @Redirect()
   async addCat(@Body() cat: CatDto) {
