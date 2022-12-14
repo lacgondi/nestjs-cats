@@ -41,7 +41,7 @@ export class AppController {
   @Post('cats/new')
   @Redirect()
   async addCat(@Body() cat: CatDto) {
-    const [result]: any = await db.execute(
+    const []: any = await db.execute(
       'INSERT INTO `macskak` (`suly`,`szem_szin`) VALUES (?, ?)',
       [cat.weight, cat.eyeColor],
     );
