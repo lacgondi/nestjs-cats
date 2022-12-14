@@ -1,8 +1,4 @@
-import {
-  Controller,
-  Get,
-  Render,
-} from '@nestjs/common';
+import { Controller, Get, Render } from '@nestjs/common';
 import { AppService } from './app.service';
 import db from './db';
 
@@ -12,7 +8,8 @@ export class AppController {
 
   @Get()
   @Render('index')
-  index() {
-    return { message: 'Welcome to the homepage' };
+  async listCats() {
+    const [rows] = await db.execute('SELECT * FROM macskak');
+    return { cat: rows };
   }
 }
