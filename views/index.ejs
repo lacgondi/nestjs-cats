@@ -9,33 +9,34 @@
     <script src="main.js"></script>
   </head>
   <style>
-    table, tr{
+    table,
+    tr {
       border: 1px solid black;
     }
   </style>
-  <div>
+  <body>
     <nav>
       <form action="/cats/new" method="get">
-        <input type="submit" value="Add cat">
+        <input type="submit" value="Add cat" />
       </form>
     </nav>
-  </div>
-  <body>
-    <form action="" method="get">
-      <input type="text" name="search">
-      <input type="submit" value="Search">
-    </form>
-    <table>
-      <tr>
-        <th>Súly</th>
-        <th>Szem szín</th>
-      </tr>
-      <% for (let c of cat) { %>
-      <tr>
-        <td><%= c.suly %></td>
-        <td><%= c.szem_szin %></td>
-      </tr>
-      <% } %>
-    </table>
+    <main>
+      <form action="" method="get">
+        <input type="text" name="search" />
+        <input type="submit" value="Search" />
+      </form>
+      <table>
+        <tr>
+          <th>Súly</th>
+          <th>Szem szín</th>
+        </tr>
+        <% for (let c of cat) { %>
+        <tr>
+          <td><%= c.suly %></td>
+          <td><%= c.szem_szin %></td>
+        </tr>
+        <% } %>
+      </table>
+    </main>
   </body>
 </html>
